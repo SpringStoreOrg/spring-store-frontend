@@ -8,6 +8,8 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Typography from "@mui/material/Container";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
+import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
 import { Carousel } from "react-carousel-minimal";
 import { addProductToCart } from "../../src/redux/actions/cartActions";
@@ -25,17 +27,12 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(9),
-    display: "flex",
     flexDirection: "column",
     alignItems: "left",
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    margin: theme.spacing(0.1, 8, 3),
   },
   submit: {
-    margin: theme.spacing(-1.5, 2.5, 2),
+    margin: theme.spacing(1, 4.7, 1),
   },
 }));
 
@@ -133,24 +130,6 @@ const ProductPage = () => {
     {
       image: "https://source.unsplash.com/featured/720x480/?{chair green}",
     },
-    {
-      image: "https://source.unsplash.com/featured/720x480/?{chair blue}",
-    },
-    {
-      image: "https://source.unsplash.com/featured/720x480/?{chair silver}",
-    },
-    {
-      image: "https://source.unsplash.com/featured/720x480/?{chair purple}",
-    },
-    {
-      image: "https://source.unsplash.com/featured/720x480/?{chair orange}",
-    },
-    {
-      image: "https://source.unsplash.com/featured/720x480/?{chair azure}",
-    },
-    {
-      image: "https://source.unsplash.com/featured/720x480/?{chair brown}",
-    },
   ];
 
   const captionStyle = {
@@ -163,95 +142,48 @@ const ProductPage = () => {
   };
 
   return (
-    <Grid sx={{ p: 5, margin: "auto", maxWidth: 1000, flexGrow: 1 }}>
-      <Carousel
-        data={data}
-        time={2000}
-        width="850px"
-        height="500px"
-        captionStyle={captionStyle}
-        radius="10px"
-        slideNumber={true}
-        slideNumberStyle={slideNumberStyle}
-        captionPosition="bottom"
-        automatic={false}
-        dots={true}
-        pauseIconColor="white"
-        pauseIconSize="40px"
-        slideBackgroundColor="darkgrey"
-        slideImageFit="cover"
-        thumbnails={true}
-        thumbnailWidth="100px"
-        style={{
-          textAlign: "center",
-          maxWidth: "850px",
-          maxHeight: "500px",
-          margin: "40px auto",
-        }}
-      />
-
-      <Container component="main" maxWidth="md">
+    <Container fixed="false" maxWidth="md">
+      <Paper>
+        <Divider />
         <CssBaseline />
+
+        <Carousel
+          data={data}
+          time={2000}
+          width="800px"
+          height="450px"
+          captionStyle={captionStyle}
+          radius="10px"
+          slideNumber={true}
+          slideNumberStyle={slideNumberStyle}
+          captionPosition="bottom"
+          automatic={false}
+          dots={true}
+          pauseIconColor="white"
+          pauseIconSize="40px"
+          slideBackgroundColor="darkgrey"
+          slideImageFit="cover"
+          thumbnails={true}
+          thumbnailWidth="100px"
+          style={{
+            textAlign: "center",
+            maxWidth: "750px",
+            maxHeight: "500px",
+            margin: "30px auto",
+          }}
+        />
         <div className={classes.paper}>
-          <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="left"
-            justifyContent="center"
-            style={{ minHeight: "3vh" }}
-          >
-            <Grid item xs={12}>
-              <Typography component="h2" variant="h4">
-                {product.name}
-              </Typography>
-              <Typography component="h3" variant="h4">
-                Description: {product.description}
-              </Typography>
-              <Typography component="h3" variant="h4">
-                Price: {product.price}
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              {token ? (
-                !clicked ? (
-                  <Button
-                    onClick={() => handleFavoriteClick()}
-                    className={classes.submit}
-                    variant="contained"
-                    style={{
-                      maxWidth: "300px",
-                      maxHeight: "30px",
-                      minWidth: "30px",
-                      minHeight: "30px",
-                      fontSize: "11px",
-                      backgroundColor: "#eeeeee",
-                    }}
-                    startIcon={<FavoriteBorderIcon />}
-                  >
-                    {" "}
-                    {"Add to Favorites"}
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => handleFavoriteClick()}
-                    className={classes.submit}
-                    variant="contained"
-                    style={{
-                      maxWidth: "300px",
-                      maxHeight: "30px",
-                      minWidth: "30px",
-                      minHeight: "30px",
-                      fontSize: "11px",
-                      backgroundColor: "#eeeeee",
-                    }}
-                    startIcon={<FavoriteIcon sx={{ color: red[500] }} />}
-                  >
-                    {" "}
-                    {"Added to Favorites"}
-                  </Button>
-                )
-              ) : !clickedLocal ? (
+          <Grid container spacing={1}>
+            <Typography component="h1">{product.name}</Typography>
+            <Typography component="h3">Description:</Typography>
+            <Typography>{product.description}</Typography>
+            <Typography component="h3">Price: {product.price}</Typography>
+          </Grid>
+        </div>
+        <Grid container spacing={5}>
+          <div className={classes.paper}>
+            {token ? (
+              !clicked ? (
                 <Button
                   onClick={() => handleFavoriteClick()}
                   className={classes.submit}
@@ -287,46 +219,46 @@ const ProductPage = () => {
                   {" "}
                   {"Added to Favorites"}
                 </Button>
-              )}
-              {token ? (
-                !cartClicked ? (
-                  <Button
-                    onClick={() => handleClickCart()}
-                    className={classes.submit}
-                    variant="contained"
-                    style={{
-                      maxWidth: "300px",
-                      maxHeight: "30px",
-                      minWidth: "30px",
-                      minHeight: "30px",
-                      fontSize: "11px",
-                      backgroundColor: "#eeeeee",
-                    }}
-                    startIcon={<AddShoppingCartIcon />}
-                  >
-                    {" "}
-                    {"Add to Cart"}
-                  </Button>
-                ) : (
-                  <Button
-                    className={classes.submit}
-                    variant="contained"
-                    style={{
-                      maxWidth: "300px",
-                      maxHeight: "30px",
-                      minWidth: "30px",
-                      minHeight: "30px",
-                      fontSize: "11px",
-                      backgroundColor: "#3f51b5",
-                      color: "#FFFFFF",
-                    }}
-                    startIcon={<ShoppingCartIcon />}
-                  >
-                    {" "}
-                    {"Prod. in Cart"}
-                  </Button>
-                )
-              ) : !cartClickedLocal ? (
+              )
+            ) : !clickedLocal ? (
+              <Button
+                onClick={() => handleFavoriteClick()}
+                className={classes.submit}
+                variant="contained"
+                style={{
+                  maxWidth: "300px",
+                  maxHeight: "30px",
+                  minWidth: "30px",
+                  minHeight: "30px",
+                  fontSize: "11px",
+                  backgroundColor: "#eeeeee",
+                }}
+                startIcon={<FavoriteBorderIcon />}
+              >
+                {" "}
+                {"Add to Favorites"}
+              </Button>
+            ) : (
+              <Button
+                onClick={() => handleFavoriteClick()}
+                className={classes.submit}
+                variant="contained"
+                style={{
+                  maxWidth: "300px",
+                  maxHeight: "30px",
+                  minWidth: "30px",
+                  minHeight: "30px",
+                  fontSize: "11px",
+                  backgroundColor: "#eeeeee",
+                }}
+                startIcon={<FavoriteIcon sx={{ color: red[500] }} />}
+              >
+                {" "}
+                {"Added to Favorites"}
+              </Button>
+            )}
+            {token ? (
+              !cartClicked ? (
                 <Button
                   onClick={() => handleClickCart()}
                   className={classes.submit}
@@ -362,12 +294,48 @@ const ProductPage = () => {
                   {" "}
                   {"Prod. in Cart"}
                 </Button>
-              )}
-            </Grid>
-          </Grid>
-        </div>
-      </Container>
-    </Grid>
+              )
+            ) : !cartClickedLocal ? (
+              <Button
+                onClick={() => handleClickCart()}
+                className={classes.submit}
+                variant="contained"
+                style={{
+                  maxWidth: "300px",
+                  maxHeight: "30px",
+                  minWidth: "30px",
+                  minHeight: "30px",
+                  fontSize: "11px",
+                  backgroundColor: "#eeeeee",
+                }}
+                startIcon={<AddShoppingCartIcon />}
+              >
+                {" "}
+                {"Add to Cart"}
+              </Button>
+            ) : (
+              <Button
+                className={classes.submit}
+                variant="contained"
+                style={{
+                  maxWidth: "300px",
+                  maxHeight: "30px",
+                  minWidth: "30px",
+                  minHeight: "30px",
+                  fontSize: "11px",
+                  backgroundColor: "#3f51b5",
+                  color: "#FFFFFF",
+                }}
+                startIcon={<ShoppingCartIcon />}
+              >
+                {" "}
+                {"Prod. in Cart"}
+              </Button>
+            )}
+          </div>
+        </Grid>
+      </Paper>
+    </Container>
   );
 };
 
